@@ -3,6 +3,7 @@ const inquirer = require('inquirer')
 const {table} = require('table')
 var listOfIds = []
 const chalk = require('chalk')
+const cTable = require('console.table');
 
 var connection = mysql.createConnection({
     port: 3306,
@@ -18,17 +19,18 @@ connection.connect(function(err) {
 })
 
 displayProducts = () => {
-    var query = 'SELECT id, product_name, price, stock_quantity FROM products'
+    var query = 'SELECT id, product_name, price, stock_quantity, department_name, product_sales FROM products'
     connection.query(query, function(err, res){
         if (err) throw err;
         // console.log(res)
         console.log(chalk.whiteBright.bgRed.bold(">>>>>>>>>>>>>>>>>>>>BAMAZON<<<<<<<<<<<<<<<<<<<<"))
-        for (var i = 0; i < res.length; i++){
-            listOfIds.push(res[i].id)
-            console.log(
-                'ID: ' + res[i].id + " || Product: " + res[i].product_name + " || " + "Price: $" + res[i].price + " || Available: " + res[i].stock_quantity + " ||"
-            )
-        }
+        console.table(res)
+        // for (var i = 0; i < res.length; i++){
+        //     listOfIds.push(res[i].id)
+        //     console.log(
+        //         'ID: ' + res[i].id + " || Product: " + res[i].product_name + " || " + "Price: $" + res[i].price + " || Available: " + res[i].stock_quantity + "  || Department: " + res[i].department_name + " || Product Sales: $" + res[i].product_sales
+        //     )
+        // }
         initChoice()
     })
 }
@@ -70,7 +72,7 @@ initChoice = () => {
 
 makePurchase = (productID, quantity, price) => {
     console.log(chalk.green(`Quantity: ${quantity} \n Price: $${price} \n Total: $`+ quantity*price) )
-    query = `UPDATE products SET stock_quantity = stock_quantity - ${quantity} WHERE id = ${productID}`
+    query = `UPDATE products SET stock_quantity = stock_quantity - ${quantity}, product_sales = product_sales + ${quantity*price} WHERE id = ${productID}`
     connection.query(query, function(err, res){
         if (err) throw err
         
