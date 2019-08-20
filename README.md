@@ -1,7 +1,8 @@
 # SQL Assignment
 
 
-
+# To Start..
+Run db_init.sql to create the database for this little project.
 
 # Bamazon Customer JS
 Bamazon Customer starts off by displaying info about the items for sale
