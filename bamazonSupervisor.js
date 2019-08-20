@@ -1,6 +1,5 @@
 const mysql = require('mysql')
 const inquirer = require('inquirer')
-const {table} = require('table')
 var listOfIds = []
 const chalk = require('chalk')
 const cTable = require('console.table');
@@ -43,21 +42,15 @@ supervisorOptions = () => {
 }
 
 viewSales = () => {
-    inquirer
-        .prompt([
-            {
-                name: 'department',
-                type: 'input',
-                message: "Enter Department's Name to View Sales"
-            }
-        ])
-        .then(function(answer){
+
             var query = `SELECT departments.department_id, departments.department_name, departments.over_head_costs, products.product_sales, products.product_sales - departments.over_head_costs as total_profit FROM departments INNER JOIN products ON (departments.department_name = products.department_name) GROUP BY departments.department_name`
             connection.query(query, function(err, res){
                 if (err) throw err
+                console.log(chalk.blue('>>>SALES<<<'))
                 console.table(res)
+                supervisorOptions()
             })
-        })
+
 }
 
 

@@ -1,6 +1,5 @@
 const mysql = require('mysql')
 const inquirer = require('inquirer')
-const {table} = require('table')
 var listOfIds = []
 const chalk = require('chalk')
 const cTable = require('console.table');
@@ -59,12 +58,6 @@ viewProducts = () =>{
         // console.log(res)
         console.log(chalk.whiteBright.bgBlue.bold(">>>>>>>>>>>>>>>>>>>>BAMAZON MANAGER<<<<<<<<<<<<<<<<<<<<"))
         console.table(res)
-        // for (var i = 0; i < res.length; i++){
-        //     listOfIds.push(res[i].id)
-        //     console.log(
-        //         'ID: ' + res[i].id + " || Product: " + res[i].product_name + " || " + "Price: $" + res[i].price + " || Available: " + res[i].stock_quantity + " || Department: " + res[i].department_name + " ||"
-        //     )
-        // }
         managerOptions()
     })
 }
@@ -76,14 +69,6 @@ viewLowInventory = () => {
         // console.log(res)
         console.log(chalk.whiteBright.bgRed.bold("Low Stock Items"))
         console.table(res)
-        // for (var i = 0; i < res.length; i++){
-            
-        //         console.log(
-        //             'ID: ' + res[i].id + " || Product: " + res[i].product_name + " || " + "Price: $" + res[i].price + " || Available: " + res[i].stock_quantity + " || Department: " + res[i].department_name + " ||"
-        //         )
-            
-        // }
-        
         managerOptions()
     })
 }
