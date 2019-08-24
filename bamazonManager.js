@@ -82,7 +82,7 @@ addToInventory = () => {
             type: "number",
             message: "Which product would you like to ressuply?",
             validate: function(value){
-                if (listOfIds.indexOf(value) !== -1){
+                if (value > 0){
                     return true
                 } 
                 return 'Please Enter a valid Product ID'
