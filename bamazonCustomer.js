@@ -1,6 +1,6 @@
 const mysql = require('mysql')
 const inquirer = require('inquirer')
-var listOfIds = []
+// var listOfIds = []
 const chalk = require('chalk')
 const cTable = require('console.table');
 
@@ -34,7 +34,7 @@ initChoice = () => {
             name: 'purchaseID',
             message: "Enter the ID of the product you'd like to purchase: ",
             validate: function(value){
-                if (listOfIds.indexOf(value) !== -1){
+                if (value > 0){
                     return true
                 } 
                 return 'Please Enter a valid Product ID'
